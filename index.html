@@ -1,232 +1,308 @@
-<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Add your custom CSS styles -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <style>
-        .preview {
-            display: flex;
-            padding: 10px; 
-            margin: 10px;
-            border: solid 2px;
-
-            justify-content: center;
-            background-color: #E8FFFF;
-
-            /* Add styling for rounded corners on preview */
-            .preview-container {
-                border-radius: 15px;
-                overflow: hidden;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                margin-top: 20px;
-            }
-
-            .card {
- display: flex;
-                perspective: 1000px;
-                transform-style: preserve-3d;
-                transition: transform 0.5s;
-                width: 202px;
-
-            }
-
-            .card:hover {
-                transform: rotateY(180deg);
-            }
-
-            .back {
-                transform: rotateY(180deg);
-                display: none;
-                /* Initially hide the back side */
-            }
-
-            .card:hover .front {
-                display: none;
-                /* Hide front content on hover */
-            }
-
-            .card:hover .back {
-                display: block;
-                /* Show back content on hover */
-            }
-
-            /* Additional styling for front and back sides */
-            .front,
-            .back {
-                /* Add your styling for front and back sides here */
-
-
-                /* Add your custom styles here */
-                .card {
-                    border-radius: 10px;
-                    /* Rounded corners for cards */
-                    margin: 10px;
-                    overflow: hidden;
-                    /* Hide overflow to make the image and category fit within */
-                    position: relative;
-                    /* Needed for absolute positioning of the category */
-                }
-
-                .card-img-top {
-                    height: 11em;
-                    border-radius: 10px;
-                    /* Rounded all corners of the image */
-                }
-
-                .card-category {
-                    position: absolute;
-                    top: 10px;
-                    right: 10px;
-                    background: rgba(0, 0, 0, 0.5);
-                    color: #fff;
-                    padding: 5px 10px;
-                    border-radius: 5px;
-                }
-            }
-    </style>
-    <title>Form and Preview</title>
+   
+    <link rel="stylesheet" href="https://www.mkbu.in/style.css">
 </head>
+<style>
+ .container {
+border-color: black;
+padding: 9;
+}
+  .pagination .page-item.active .page-link {
+    background-color: #FFD1;
+    border-color: red;
+    
+    color: red; /* Set text color to white or a contrasting color for visibility */
+  }
+</style>
+<style>
+  body {
+    background-image: url('https://source.unsplash.com/featured?sarangpur');
+    background-size: cover;
+    background-repeat: no-repeat;
+   
+}
+    .card {
+        perspective: 1000px;
+        transform-style: preserve-3d;
+        transition: transform 0.5s;
+        height: 21vh;
+
+}
+   
+    .card:hover {
+        transform: rotateY(180deg);
+    }
+
+  
+
+    .back {
+        transform: rotateY(180deg);
+        display: none; /* Initially hide the back side */
+    }
+
+    .card:hover .front {
+        display: none; /* Hide front content on hover */
+    }
+
+    .card:hover .back {
+        display: block; /* Show back content on hover */
+    }
+</style>
+
+  <style>
+    /* Add your custom styles here */
+    .card {
+        border-radius: 10px; /* Rounded corners for cards */
+        margin: 10px;
+        overflow: hidden; /* Hide overflow to make the image and category fit within */
+        position: relative; /* Needed for absolute positioning of the category */
+    }
+    .card-img-top {
+        height: 11em;
+        border-radius: 10px; /* Rounded all corners of the image */
+    }
+    .card-category {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+</style>
+<style>
+    /* Add your custom styles here */
+    .row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 2 columns */
+        grid-gap: -10px; /* Gap between grid items */
+    }
+
+    .card {
+        border-radius: 10px; /* Rounded corners for cards */
+    }
+
+    .card-img-top {
+        border-radius: 10px; /* Rounded all corners of the image */
+    }
+</style>
+<style>
+    /* Add your custom styles here */
+    .form-group {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .pagination {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+
+        body {
+            text-align: center;
+        }
+
+        h1 {
+         
+            margin-top: 5px; /* Adjust as needed */
+        }
+    </style>
+</style>
+
 
 <body>
-
-
-    <!-- Preview Container -->
-    <div class="col-md-6">
-        <h2>Preview</h2>
-        <div class="preview">
-            <div class="card">
-                <div class="front">
-                    <img id="previewImg" class="card-img-top rounded" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHuPl1DpB7IwNmONhia4y3VehizwSK8jIrAw&s" alt="Preview Image">
-                    <div id="previewCategory" class="card-category">Category</div>
-                    <div class="mt-3">
-
-                        <h3 id="previewName" class="card-title">shop name</h3>
-                        <p id="previewSDescription" class="card-text">Short description </p>
-                         
-                    </div>
+    
+    <div class="container">
+        <main>
+            
+       <h1>Salangpur.info </h1>
+       <form id="searchForm">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <input type="text" class="form-control" id="searchInput" placeholder="Search by name or address">
                 </div>
-                <div class="card-body back">
-                    <h5 id="previewNameBack" class="card-title"></h5>
-                    <p id="previewPhone" class="card-text">Phone 1: </p>
-                    <p id="previewPhone2" class="card-text">Phone 2: </p>
-                    <p id="previewAddress" class="card-text">Address: </p>
-                    <p id="previewLocation" class="card-text">Location: </p>
-                    <p id="previewDescription" class="card-text"></p>
+                <div class="form-group col-md-4">
+                    <select class="form-control" id="categorySelect">
+                        <option value="all">All Categories</option>
+                        <!-- Categories will be populated here dynamically from JSON -->
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <button type="submit" class="btn btn-outline-danger">Search</button>  <ul id="pagination" class="pagination"></ul>
+    
                 </div>
             </div>
+        </form
+
+ 
+
+        <div id="businessGrid" class="row">
+            <!-- Businesses will be dynamically generated here -->
         </div>
+        <ul id="pagination" class="pagination"></ul>
+    </div>
 
-        <div class="container mt-4">
-            <div class="row">
-                <!-- Form Fill-up Container -->
-                <div class="col-md-6">
-                    <h2>Form Fill-up</h2>
-                    <form id="shopForm" action="submit.php" method="post">
-                        <div class="form-group">
-                            <label for="name">Name:</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="category">Category:</label>
-                            <input type="text" class="form-control" id="category" name="category" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone:</label>
-                            <input type="text" class="form-control" id="phone" name="phone" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone2">Alternate Phone:</label>
-                            <input type="text" class="form-control" id="phone2" name="phone2">
-                        </div>
-                        <div class="form-group">
-                            <label for="address">Address:</label>
-                            <input type="text" class="form-control" id="address" name="address" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="location">Location:</label>
-                            <input type="text" class="form-control" id="location" name="location" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="image">Image URL:</label>
-                            <input type="url" class="form-control" id="image" name="image" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="sdescription">Short Description:</label>
-                            <textarea class="form-control" id="sdescription" name="sdescription" rows="3" required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="description">Long Description:</label>
-                            <textarea class="form-control" id="description" name="description" rows="5" required></textarea>
-                        </div>
-       <input type="hidden" id="randomId" name="randomId">
+    <!-- Add Bootstrap and custom JavaScript libraries if needed -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const businessGrid = document.getElementById('businessGrid');
+            const searchForm = document.getElementById('searchForm');
+            const searchInput = document.getElementById('searchInput');
+            const categorySelect = document.getElementById('categorySelect');
+            const pagination = document.getElementById('pagination');
 
+            let businesses = [];
+            let currentPage = 1;
+            const businessesPerPage = 10;
 
-  <input type="hidden" id="timestampInput" name="timeStamp">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-                <div>
+            // Function to fetch business data and categories
+            function fetchData() {
+                // Fetch businesses from JSON file (approvedData.json)
+                fetch('/approvedData.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        businesses = data;
+                        displayBusinesses();
+                    })
+                    .catch(error => console.error('Error fetching businesses:', error));
 
-                    <script>
-                        // Update preview based on form input
-                        document.getElementById('shopForm').addEventListener('input', function() {
-                            document.getElementById('previewName').innerText = document.getElementById('name').value;
-                            document.getElementById('previewCategory').innerText = document.getElementById('category').value;
-                            document.getElementById('previewPhone').innerText = 'Phone: ' + document.getElementById('phone').value;
-                            document.getElementById('previewPhone2').innerText = 'Alternate Phone: ' + document.getElementById('phone2').value;
-                            document.getElementById('previewAddress').innerText = 'Address: ' + document.getElementById('address').value;
-                            document.getElementById('previewLocation').innerText = 'Location: ' + document.getElementById('location').value;
-                            document.getElementById('previewImg').src = document.getElementById('image').value;
-                            document.getElementById('previewSDescription').innerText = document.getElementById('sdescription').value;
-                            document.getElementById('previewDescription').innerText = document.getElementById('description').value;
+                // Fetch categories from a JSON file
+                fetch('categories.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        const categories = data.categories;
+
+                        // Populate category dropdown with options
+                        categories.forEach(category => {
+                            const option = document.createElement('option');
+                            option.value = category.toLowerCase();
+                            option.textContent = category;
+                            categorySelect.appendChild(option);
                         });
-                    </script>
+                    })
+                    .catch(error => console.error('Error fetching categories:', error));
+            }
+
+            // Function to display businesses
+            function displayBusinesses() {
+                businessGrid.innerHTML = '';
+
+                // Filtering based on search and category
+                const searchValue = searchInput.value.toLowerCase();
+                const categoryValue = categorySelect.value.toLowerCase();
+                const filteredBusinesses = businesses.filter(business => (
+                    (searchValue === '' || business.name.toLowerCase().includes(searchValue) || business.address.toLowerCase().includes(searchValue)) &&
+                    (categoryValue === 'all' || business.category.toLowerCase() === categoryValue)
+                ));
+
+                const startIndex = (currentPage - 1) * businessesPerPage;
+                const endIndex = startIndex + businessesPerPage;
+                const businessesToDisplay = filteredBusinesses.slice(startIndex, endIndex);
+
+                businessesToDisplay.forEach(business => {
+                    const card = document.createElement('div');
+                    card.classList.add('col-md-6');
+                    card.innerHTML = `
+                        <div class="card">
+                             <div class="front" >
+                            <img src="${business.image}" class="card-img-top rounded-left" alt="${business.name}">
+                            <div class="card-category">${business.category}</div>
+   <h3 class="card-title" style="margin-left: 7px; margin-top: 8px; ">${business.name}</h3>      <p class="card-text" style="margin-left: 7px; " >${business.sdescription}</p>
+            </div>
+                            <div class="card-body back">
+                                <h5 class="card-title">${business.name}</h5>
+                                <p class="card-text">Phone 1: ${business.phone}</p>
+                                <p class="card-text">Phone 2: ${business.phone2}</p>
+                                <p class="card-text">Address: ${business.address}</p> 
+                                <p class="card-text">${business.description}</p>
+            </div>
+        </div>
+    `;
+    businessGrid.appendChild(card);
+});
+
+                updatePagination(filteredBusinesses.length);
+            }
+
+            // Function to update pagination
+            function updatePagination(totalBusinesses) {
+                pagination.innerHTML = '';
+
+                const totalPages = Math.ceil(totalBusinesses / businessesPerPage);
+
+                if (totalPages > 1) {
+                    for (let i = 1; i <= totalPages; i++) {
+                        const pageItem = document.createElement('li');
+                        pageItem.classList.add('page-item');
+                        if (i === currentPage) {
+                            pageItem.classList.add('active');
+                        }
+                        const pageLink = document.createElement('a');
+                        pageLink.classList.add('page-link');
+                        pageLink.href = '#';
+                        pageLink.textContent = i;
+                        pageLink.addEventListener('click', () => {
+                            currentPage = i;
+                            displayBusinesses();
+                        });
+                        pageItem.appendChild(pageLink);
+                        pagination.appendChild(pageItem);
+                    }
+                }
+            }
+
+            // Handle form submission
+            searchForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                currentPage = 1;
+                displayBusinesses();
+            });
+
+            // Initial data fetching and display
+            fetchData();
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const categorySelect = document.getElementById('categorySelect');
+
+            // Fetch categories from a JSON file
+            fetch('/approvedData.json')  // Replace 'yourdata.json' with the correct path to your JSON file
+                .then(response => response.json())
+                .then(data => {
+                    const categories = data.map(item => item.category);
+
+                    // Remove duplicates and add categories as options
+                    const uniqueCategories = [...new Set(categories)];
+
+                    uniqueCategories.forEach(category => {
+                        const option = document.createElement('option');
+                        option.value = category;
+                        option.textContent = category;
+                        categorySelect.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching categories:', error));
+        });
+    </script>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
-  function generateRandomId(length) {
-    const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    let randomId = "";
-    for (let i = 0; i < length; i++) {
-      const randomIndex = Math.floor(Math.random() * charset.length);
-      randomId += charset.charAt(randomIndex);
-    }
-    return randomId;
-  }
-
-  // Triggered when the form is submitted
-  function onSubmit(event) {
-    // Prevent the form from submitting immediately
-    event.preventDefault();
-
-    // Generate a random ID of length 12
-    const randomId = generateRandomId(12);
-
-    // Set the generated ID as the value of the hidden input field
-    document.getElementById("randomId").value = randomId;
-
-    // Submit the form programmatically
-    document.getElementById("shopForm").submit();
-  }
-
-  // Add event listener for form submission
-  document.getElementById("shopForm").addEventListener("submit", onSubmit);
+    $(document).ready(function () {
+        $('#searchInput').on('input', function () {
+            // Perform live search here based on the input value
+            // Update the results dynamically without submitting the form
+        });
+    });
 </script>
-
-
-  <script>
-    // Get the current timestamp in milliseconds
-    const currentTimestamp = Date.now();
-
-    // Set the value of the hidden input field
-    document.getElementById('timestampInput').value = currentTimestamp;
-
-    // Log the timestamp to the console (optional)
-    console.log('Current Timestamp:', currentTimestamp);
-  </script>
-
 </body>
-</html>
-</body>
-
-                          </html>
+</html
