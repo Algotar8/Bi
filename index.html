@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        .preview {
+            display: flex;
+            padding: 10px; 
+            margin: 10px;
+            border: solid 2px;
+
+            justify-content: center;
+            background-color: #E8FFFF;
+
+            /* Add styling for rounded corners on preview */
+            .preview-container {
+                border-radius: 15px;
+                overflow: hidden;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                margin-top: 20px;
+            }
+
+            .card {
+ display: flex;
+                perspective: 1000px;
+                transform-style: preserve-3d;
+                transition: transform 0.5s;
+                width: 202px;
+
+            }
+
+            .card:hover {
+                transform: rotateY(180deg);
+            }
+
+            .back {
+                transform: rotateY(180deg);
+                display: none;
+                /* Initially hide the back side */
+            }
+
+            .card:hover .front {
+                display: none;
+                /* Hide front content on hover */
+            }
+
+            .card:hover .back {
+                display: block;
+                /* Show back content on hover */
+            }
+
+            /* Additional styling for front and back sides */
+            .front,
+            .back {
+                /* Add your styling for front and back sides here */
+
+
+                /* Add your custom styles here */
+                .card {
+                    border-radius: 10px;
+                    /* Rounded corners for cards */
+                    margin: 10px;
+                    overflow: hidden;
+                    /* Hide overflow to make the image and category fit within */
+                    position: relative;
+                    /* Needed for absolute positioning of the category */
+                }
+
+                .card-img-top {
+                    height: 11em;
+                    border-radius: 10px;
+                    /* Rounded all corners of the image */
+                }
+
+                .card-category {
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    background: rgba(0, 0, 0, 0.5);
+                    color: #fff;
+                    padding: 5px 10px;
+                    border-radius: 5px;
+                }
+            }
+    </style>
+    <title>Form and Preview</title>
+</head>
+
+<body>
+
+
+    <!-- Preview Container -->
+    <div class="col-md-6">
+        <h2>Preview</h2>
+        <div class="preview">
+            <div class="card">
+                <div class="front">
+                    <img id="previewImg" class="card-img-top rounded" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHuPl1DpB7IwNmONhia4y3VehizwSK8jIrAw&s" alt="Preview Image">
+                    <div id="previewCategory" class="card-category">Category</div>
+                    <div class="mt-3">
+
+                        <h3 id="previewName" class="card-title">shop name</h3>
+                        <p id="previewSDescription" class="card-text">Short description </p>
+                         
+                    </div>
+                </div>
+                <div class="card-body back">
+                    <h5 id="previewNameBack" class="card-title"></h5>
+                    <p id="previewPhone" class="card-text">Phone 1: </p>
+                    <p id="previewPhone2" class="card-text">Phone 2: </p>
+                    <p id="previewAddress" class="card-text">Address: </p>
+                    <p id="previewLocation" class="card-text">Location: </p>
+                    <p id="previewDescription" class="card-text"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mt-4">
+            <div class="row">
+                <!-- Form Fill-up Container -->
+                <div class="col-md-6">
+                    <h2>Form Fill-up</h2>
+                    <form id="shopForm" action="submit.php" method="post">
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Category:</label>
+                            <input type="text" class="form-control" id="category" name="category" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone:</label>
+                            <input type="text" class="form-control" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone2">Alternate Phone:</label>
+                            <input type="text" class="form-control" id="phone2" name="phone2">
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Address:</label>
+                            <input type="text" class="form-control" id="address" name="address" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Location:</label>
+                            <input type="text" class="form-control" id="location" name="location" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="image">Image URL:</label>
+                            <input type="url" class="form-control" id="image" name="image" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sdescription">Short Description:</label>
+                            <textarea class="form-control" id="sdescription" name="sdescription" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Long Description:</label>
+                            <textarea class="form-control" id="description" name="description" rows="5" required></textarea>
+                        </div>
+       <input type="hidden" id="randomId" name="randomId">
+
+
+  <input type="hidden" id="timestampInput" name="timeStamp">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+                <div>
+
+                    <script>
+                        // Update preview based on form input
+                        document.getElementById('shopForm').addEventListener('input', function() {
+                            document.getElementById('previewName').innerText = document.getElementById('name').value;
+                            document.getElementById('previewCategory').innerText = document.getElementById('category').value;
+                            document.getElementById('previewPhone').innerText = 'Phone: ' + document.getElementById('phone').value;
+                            document.getElementById('previewPhone2').innerText = 'Alternate Phone: ' + document.getElementById('phone2').value;
+                            document.getElementById('previewAddress').innerText = 'Address: ' + document.getElementById('address').value;
+                            document.getElementById('previewLocation').innerText = 'Location: ' + document.getElementById('location').value;
+                            document.getElementById('previewImg').src = document.getElementById('image').value;
+                            document.getElementById('previewSDescription').innerText = document.getElementById('sdescription').value;
+                            document.getElementById('previewDescription').innerText = document.getElementById('description').value;
+                        });
+                    </script>
+<script>
+  function generateRandomId(length) {
+    const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let randomId = "";
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * charset.length);
+      randomId += charset.charAt(randomIndex);
+    }
+    return randomId;
+  }
+
+  // Triggered when the form is submitted
+  function onSubmit(event) {
+    // Prevent the form from submitting immediately
+    event.preventDefault();
+
+    // Generate a random ID of length 12
+    const randomId = generateRandomId(12);
+
+    // Set the generated ID as the value of the hidden input field
+    document.getElementById("randomId").value = randomId;
+
+    // Submit the form programmatically
+    document.getElementById("shopForm").submit();
+  }
+
+  // Add event listener for form submission
+  document.getElementById("shopForm").addEventListener("submit", onSubmit);
+</script>
+
+
+  <script>
+    // Get the current timestamp in milliseconds
+    const currentTimestamp = Date.now();
+
+    // Set the value of the hidden input field
+    document.getElementById('timestampInput').value = currentTimestamp;
+
+    // Log the timestamp to the console (optional)
+    console.log('Current Timestamp:', currentTimestamp);
+  </script>
+
+</body>
+</html>
+</body>
+
+                          </html>
