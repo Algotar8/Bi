@@ -166,7 +166,7 @@ padding: 9;
             // Function to fetch business data and categories
             function fetchData() {
                 // Fetch businesses from JSON file (approvedData.json)
-                fetch('/approvedData.json')
+                fetch('approvedData.json')
                     .then(response => response.json())
                     .then(data => {
                         businesses = data;
@@ -276,7 +276,7 @@ padding: 9;
             const categorySelect = document.getElementById('categorySelect');
 
             // Fetch categories from a JSON file
-            fetch('/approvedData.json')  // Replace 'yourdata.json' with the correct path to your JSON file
+            fetch('approvedData.json')  // Replace 'yourdata.json' with the correct path to your JSON file
                 .then(response => response.json())
                 .then(data => {
                     const categories = data.map(item => item.category);
