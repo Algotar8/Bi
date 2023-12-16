@@ -123,8 +123,7 @@ padding: 9;
     <div class="container">
         <main>
             
-       <h1>Salangpur.info </h1>
-       <form id="searchForm">
+       <h1>Busniness Directory</h1>  <form id="searchForm">
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <input type="text" class="form-control" id="searchInput" placeholder="Search by name or address">
@@ -165,8 +164,8 @@ padding: 9;
 
             // Function to fetch business data and categories
             function fetchData() {
-                // Fetch businesses from JSON file (approvedData.json)
-                fetch('approvedData.json')
+                // Fetch businesses from JSON file (https://algotar8.github.io/Bi/approvedData.json)
+                fetch('https://algotar8.github.io/Bi/approvedData.json')
                     .then(response => response.json())
                     .then(data => {
                         businesses = data;
@@ -276,7 +275,7 @@ padding: 9;
             const categorySelect = document.getElementById('categorySelect');
 
             // Fetch categories from a JSON file
-            fetch('approvedData.json')  // Replace 'yourdata.json' with the correct path to your JSON file
+            fetch('https://algotar8.github.io/Bi/approvedData.json')  // Replace 'yourdata.json' with the correct path to your JSON file
                 .then(response => response.json())
                 .then(data => {
                     const categories = data.map(item => item.category);
